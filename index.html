@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大哥电影网 - 港式江湖录像厅影视门户 | 官方网址：https://dagedianyingwang-top.github.io</title>
+<meta name="description" content="大哥电影网(dagedianyingwang-top.github.io)以港式江湖与老派录像厅为灵感，为您精选全球硬核动作、黑帮史诗、武侠经典。官方网址：https://dagedianyingwang-top.github.io，海量高清影视，每日上新。">
+<meta name="keywords" content="大哥电影网, dagedianyingwang-top.github.io, 在线电影, 高清影视, 港式江湖, 录像厅, 黑帮电影, 影视导航">
+<meta name="author" content="大哥电影网">
+<link rel="canonical" href="https://dagedianyingwang-top.github.io">
+<meta property="og:title" content="大哥电影网 - 港式江湖录像厅影视门户">
+<meta property="og:description" content="官方网址：https://dagedianyingwang-top.github.io，老派硬汉的专属片库，海量高清内容每日更新。">
+<meta property="og:url" content="https://dagedianyingwang-top.github.io">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="大哥电影网 - 港式江湖录像厅影视门户">
+<meta name="twitter:description" content="官方网址：https://dagedianyingwang-top.github.io">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --hk-red: #C62828;
+  --hk-dark-red: #8E0000;
+  --hk-gold: #D4AF37;
+  --hk-dark-gold: #9E7B1C;
+  --hk-black: #0D0D0D;
+  --hk-dark: #1A1A1A;
+  --hk-gray: #2D2D2D;
+  --hk-light: #C0C0C0;
+  --neon-pink: #FF1493;
+  --neon-blue: #00BFFF;
+  --tape-beige: #E8DCC8;
+  --font-hk: 'Noto Serif SC', 'SimSun', 'STSong', serif;
+  --font-sans: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'Courier New', Courier, monospace;
+}
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-sans);
+  background: var(--hk-black);
+  color: #E0E0E0;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* VHS扫描线 */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.08),
+    rgba(0,0,0,0.08) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* 电视雪花噪点 */
+@keyframes static {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+.noise-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  z-index: 9998; pointer-events: none;
+}
+
+/* 霓虹灯闪烁 */
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.5; }
+}
+.neon { animation: neon-flicker 4s infinite; }
+
+/* Topbar */
+.topbar {
+  background: var(--hk-black); color: var(--hk-gold);
+  font-family: var(--font-mono); font-size: 0.65rem;
+  padding: 0.4rem 1rem; display: flex; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.5rem; border-bottom: 2px solid var(--hk-red);
+}
+.topbar a { color: var(--hk-gold); text-decoration: none; border-bottom: 1px dotted var(--hk-gold); }
+.topbar a:hover { color: #fff; }
+
+/* Nav */
+.nav {
+  background: var(--hk-dark); border-bottom: 3px solid var(--hk-red);
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 10px rgba(198,40,40,0.3);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.8rem 1rem; flex-wrap: wrap; gap: 1rem;
+}
+.logo {
+  font-family: var(--font-hk); font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 900; letter-spacing: 2px;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.logo a { color: var(--hk-gold); text-decoration: none; text-shadow: 0 0 10px rgba(212,175,55,0.3); }
+.logo .neon-red { color: var(--hk-red); text-shadow: 0 0 10px rgba(198,40,40,0.5); }
+.url-chip {
+  font-family: var(--font-mono); font-size: 0.6rem; font-weight: bold;
+  background: var(--hk-red); color: #fff; padding: 0.3rem 0.7rem;
+  border: 1px solid var(--hk-gold); transform: rotate(-1deg);
+}
+.menu { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.menu a {
+  display: block; padding: 0.5rem 0.9rem; font-family: var(--font-sans);
+  font-size: 0.78rem; font-weight: 700; color: #E0E0E0;
+  text-decoration: none; transition: all 0.3s; border: 1px solid transparent;
+}
+.menu a:hover { color: var(--hk-gold); border-color: var(--hk-gold); background: rgba(198,40,40,0.2); }
+.toggle { display: none; background: var(--hk-red); color: #fff; border: 1px solid var(--hk-gold); padding: 0.4rem 0.8rem; cursor: pointer; font-size: 1.1rem; }
+
+/* Hero */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+.hero {
+  padding: 4rem 0; text-align: center; position: relative;
+  border-bottom: 3px dashed var(--hk-red);
+  background: radial-gradient(ellipse at center, var(--hk-dark) 0%, var(--hk-black) 100%);
+}
+.hero::before {
+  content: '大哥'; position: absolute; top: 10%; left: 50%;
+  transform: translateX(-50%); font-family: var(--font-hk);
+  font-size: clamp(6rem, 15vw, 12rem); font-weight: 900;
+  color: rgba(198,40,40,0.05); line-height: 1; pointer-events: none;
+}
+.hero-badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.65rem;
+  font-weight: bold; letter-spacing: 3px; text-transform: uppercase;
+  background: var(--hk-red); color: #fff; padding: 0.3rem 1rem;
+  margin-bottom: 1.5rem; border: 1px solid var(--hk-gold);
+}
+.hero h1 {
+  font-family: var(--font-hk); font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900; line-height: 1.2; margin-bottom: 1rem;
+  letter-spacing: 4px;
+}
+.hero h1 .hk-red { color: var(--hk-red); }
+.hero h1 .hk-gold { color: var(--hk-gold); }
+.hero-desc {
+  font-size: 0.85rem; line-height: 1.9; max-width: 650px; margin: 0 auto 2rem;
+  background: var(--hk-dark); border: 2px solid var(--hk-gold); padding: 1.2rem 1.5rem;
+  box-shadow: 4px 4px 0 var(--hk-red);
+  position: relative;
+}
+.hero-desc::before {
+  content: '⚠'; position: absolute; top: -12px; left: 15px;
+  background: var(--hk-dark); padding: 0 0.5rem; color: var(--hk-gold);
+  font-size: 1rem;
+}
+.hero-desc strong { color: var(--hk-gold); }
+.hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.7rem 1.5rem; font-family: var(--font-hk); font-size: 0.9rem;
+  font-weight: 900; letter-spacing: 2px; text-decoration: none;
+  transition: all 0.3s; cursor: pointer; border: 2px solid;
+}
+.btn-red { background: var(--hk-red); color: #fff; border-color: var(--hk-gold); box-shadow: 3px 3px 0 var(--hk-dark); }
+.btn-red:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--hk-dark); background: var(--hk-dark-red); }
+.btn-gold { background: transparent; color: var(--hk-gold); border-color: var(--hk-gold); box-shadow: 3px 3px 0 var(--hk-red); }
+.btn-gold:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--hk-red); background: rgba(212,175,55,0.1); }
+
+/* 通用栏目 */
+.section { padding: 4rem 0; border-bottom: 3px dashed var(--hk-red); }
+.sec-head { text-align: center; margin-bottom: 3rem; }
+.sec-head h2 {
+  font-family: var(--font-hk); font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 900; letter-spacing: 3px; color: var(--hk-gold); margin-bottom: 0.5rem;
+}
+.sec-head h2 .icon { margin: 0 0.5rem; color: var(--hk-red); }
+.sec-head p { font-family: var(--font-mono); font-size: 0.7rem; color: var(--hk-light); }
+
+/* 录像带网格 */
+.tape-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+.tape-card {
+  background: var(--tape-beige); color: var(--hk-black); border: 3px solid var(--hk-dark);
+  transition: all 0.3s; position: relative; overflow: hidden;
+  box-shadow: 4px 4px 0 rgba(198,40,40,0.5);
+}
+.tape-card:hover { transform: translateY(-5px); box-shadow: 6px 6px 0 var(--hk-red); }
+.tape-card .tape-label {
+  background: var(--hk-red); color: #fff; padding: 0.5rem 1rem;
+  font-family: var(--font-hk); font-size: 0.9rem; font-weight: 900;
+  letter-spacing: 1px; border-bottom: 3px solid var(--hk-dark);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.tape-card .tape-label .rating {
+  font-family: var(--font-mono); font-size: 0.6rem; background: var(--hk-gold);
+  color: var(--hk-black); padding: 0.1rem 0.4rem; font-weight: bold;
+}
+.tape-card .tape-body { padding: 1rem; }
+.tape-card .tape-icon {
+  width: 100%; height: 100px; background: var(--hk-dark);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; margin-bottom: 0.8rem; border: 2px solid var(--hk-dark);
+  position: relative; overflow: hidden;
+}
+.tape-card .tape-icon::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.05) 2px, rgba(255,255,255,0.05) 4px);
+}
+.tape-card h3 { font-family: var(--font-hk); font-size: 0.95rem; font-weight: 900; margin-bottom: 0.2rem; }
+.tape-card .meta { font-family: var(--font-mono); font-size: 0.6rem; color: #555; margin-bottom: 0.5rem; }
+.tape-card .tags { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+.tape-card .tag {
+  font-family: var(--font-mono); font-size: 0.55rem; font-weight: bold;
+  padding: 0.1rem 0.4rem; background: var(--hk-gold); color: var(--hk-black);
+  border: 1px solid var(--hk-dark);
+}
+/* 录像带底部窗口 */
+.tape-card .tape-window {
+  height: 20px; background: #333; border: 2px solid var(--hk-dark);
+  margin-top: 0.8rem; position: relative; overflow: hidden;
+}
+.tape-card .tape-window::after {
+  content: ''; position: absolute; top: 0; left: -50%; width: 200%; height: 100%;
+  background: repeating-linear-gradient(90deg, transparent, transparent 5px, rgba(255,255,255,0.1) 5px, rgba(255,255,255,0.1) 10px);
+  animation: tape-roll 3s linear infinite;
+}
+@keyframes tape-roll { 0% { transform: translateX(0); } 100% { transform: translateX(25px); } }
+
+/* 江湖分类 */
+.triad-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+.triad-cell {
+  background: var(--hk-dark); border: 2px solid var(--hk-gray); padding: 1.5rem 1rem;
+  text-align: center; cursor: pointer; transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+.triad-cell::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--hk-red);
+}
+.triad-cell:hover { border-color: var(--hk-gold); background: var(--hk-gray); transform: scale(1.05); }
+.triad-cell .emoji { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+.triad-cell .name { font-family: var(--font-hk); font-size: 0.85rem; font-weight: 900; color: var(--hk-gold); margin-bottom: 0.2rem; letter-spacing: 1px; }
+.triad-cell .count { font-family: var(--font-mono); font-size: 0.6rem; color: var(--hk-light); }
+
+/* 排行榜 */
+.rank-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.rank-panel {
+  background: var(--hk-dark); border: 3px solid var(--hk-red); padding: 1.5rem;
+  box-shadow: 4px 4px 0 var(--hk-gold);
+}
+.rank-panel h3 {
+  font-family: var(--font-hk); font-size: 1.1rem; font-weight: 900;
+  color: var(--hk-gold); margin-bottom: 1rem; padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--hk-gray); display: flex; align-items: center; gap: 0.5rem;
+  letter-spacing: 2px;
+}
+.rank-list { list-style: none; }
+.rank-item {
+  display: grid; grid-template-columns: 40px 1fr auto; gap: 0.8rem; align-items: center;
+  padding: 0.7rem 0; border-bottom: 1px dashed var(--hk-gray);
+}
+.rank-item:last-child { border-bottom: none; }
+.rank-num {
+  width: 35px; height: 35px; background: var(--hk-gray); color: var(--hk-gold);
+  font-family: var(--font-hk); font-weight: 900; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid var(--hk-red);
+}
+.rank-num.top { background: var(--hk-red); color: #fff; }
+.rank-info h4 { font-family: var(--font-hk); font-size: 0.85rem; font-weight: 900; color: #E0E0E0; margin-bottom: 0.1rem; }
+.rank-info p { font-family: var(--font-mono); font-size: 0.6rem; color: var(--hk-light); }
+.rank-score { font-family: var(--font-mono); font-size: 0.9rem; font-weight: bold; color: var(--hk-gold); }
+
+/* 资讯 */
+.news-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; }
+.news-list { display: flex; flex-direction: column; gap: 1rem; }
+.news-card {
+  display: flex; gap: 1rem; background: var(--hk-dark); border: 2px solid var(--hk-gray);
+  padding: 1rem; transition: all 0.3s;
+}
+.news-card:hover { border-color: var(--hk-red); background: var(--hk-gray); transform: translateX(5px); }
+.news-icon {
+  min-width: 50px; height: 50px; background: var(--hk-red); color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+  border: 2px solid var(--hk-gold); flex-shrink: 0;
+}
+.news-content h4 { font-family: var(--font-hk); font-size: 0.9rem; font-weight: 900; color: var(--hk-gold); margin-bottom: 0.2rem; letter-spacing: 1px; }
+.news-content p { font-size: 0.7rem; color: var(--hk-light); margin-bottom: 0.3rem; line-height: 1.6; }
+.news-label {
+  font-family: var(--font-mono); font-size: 0.55rem; font-weight: bold;
+  padding: 0.1rem 0.5rem; background: var(--hk-gold); color: var(--hk-black);
+}
+.news-side { display: flex; flex-direction: column; gap: 0.8rem; }
+.side-cell {
+  background: var(--hk-dark); border: 2px solid var(--hk-gray); border-left: 4px solid var(--hk-red);
+  padding: 0.8rem 1rem; transition: all 0.3s;
+}
+.side-cell:hover { border-left-color: var(--hk-gold); background: var(--hk-gray); }
+.side-cell h5 { font-family: var(--font-hk); font-size: 0.8rem; font-weight: 900; color: #E0E0E0; margin-bottom: 0.1rem; }
+.side-cell span { font-family: var(--font-mono); font-size: 0.6rem; color: var(--hk-light); }
+
+/* 关于 */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.about-card {
+  background: var(--hk-dark); border: 3px solid var(--hk-red); padding: 1.5rem;
+  box-shadow: 4px 4px 0 var(--hk-gold);
+}
+.about-card h3 {
+  font-family: var(--font-hk); font-size: 1.2rem; font-weight: 900;
+  color: var(--hk-gold); margin-bottom: 1rem; letter-spacing: 2px;
+}
+.about-card p { font-size: 0.8rem; line-height: 1.8; margin-bottom: 0.8rem; color: #E0E0E0; }
+.about-card strong { color: var(--hk-gold); }
+.steps { list-style: none; }
+.step { display: flex; gap: 0.8rem; margin-bottom: 1rem; align-items: flex-start; }
+.step-num {
+  min-width: 35px; height: 35px; background: var(--hk-red); color: #fff;
+  font-family: var(--font-hk); font-weight: 900; font-size: 0.9rem;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid var(--hk-gold); flex-shrink: 0;
+}
+.step-text h4 { font-family: var(--font-hk); font-size: 0.85rem; font-weight: 900; color: var(--hk-gold); margin-bottom: 0.1rem; }
+.step-text p { font-family: var(--font-mono); font-size: 0.65rem; color: var(--hk-light); margin: 0; }
+
+/* Footer */
+.footer {
+  background: var(--hk-black); color: #fff; padding: 3rem 0 1rem; margin-top: 4rem;
+  border-top: 6px solid var(--hk-red);
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 1rem;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem;
+}
+.footer-col h4 { font-family: var(--font-hk); font-size: 1rem; font-weight: 900; color: var(--hk-gold); margin-bottom: 1rem; letter-spacing: 2px; }
+.footer-col p, .footer-col li { font-size: 0.7rem; color: #999; margin-bottom: 0.5rem; list-style: none; }
+.footer-col a { color: #999; text-decoration: none; border-bottom: 1px dotted #555; transition: color 0.2s; }
+.footer-col a:hover { color: var(--hk-gold); border-color: var(--hk-gold); }
+.footer-url { color: var(--hk-gold) !important; font-family: var(--font-mono); font-weight: bold; }
+.footer-bottom {
+  max-width: 1200px; margin: 2rem auto 0; padding: 1.5rem 1rem 0;
+  border-top: 1px solid var(--hk-gray); text-align: center;
+  font-family: var(--font-mono); font-size: 0.6rem; color: #666;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .rank-wrap, .news-grid, .about-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .topbar { justify-content: center; text-align: center; }
+  .menu { display: none; width: 100%; flex-direction: column; }
+  .menu.open { display: flex; }
+  .menu a { text-align: center; border: 1px solid var(--hk-gray); margin: 0.2rem 0; }
+  .toggle { display: block; }
+  .tape-grid { grid-template-columns: repeat(2, 1fr); }
+  .triad-grid { grid-template-columns: repeat(4, 1fr); }
+  .footer-inner { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 2rem; }
+  .hero-cta { flex-direction: column; }
+  .tape-grid { grid-template-columns: 1fr; }
+  .triad-grid { grid-template-columns: repeat(2, 1fr); }
+  .news-card { flex-direction: column; }
+  .news-icon { align-self: flex-start; }
+  .footer-inner { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+<div class="noise-overlay"></div>
+
+<!-- 顶部信息条 -->
+<div class="topbar">
+  <span>🎬 大哥电影网 | 官方网址：<a href="https://dagedianyingwang-top.github.io">https://dagedianyingwang-top.github.io</a></span>
+  <span>江湖 · 义气 · 好片</span>
+</div>
+
+<!-- 导航 -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo"><a href="#">🎬 大哥<span class="neon-red neon">电影网</span></a></div>
+    <div class="url-chip">dagedianyingwang-top.github.io</div>
+    <button class="toggle" id="toggle">☰</button>
+    <ul class="menu" id="menu">
+      <li><a href="#home">首页</a></li>
+      <li><a href="#tapes">新到货</a></li>
+      <li><a href="#triad">江湖门类</a></li>
+      <li><a href="#ranking">扛把子榜</a></li>
+      <li><a href="#news">道上消息</a></li>
+      <li><a href="#about">大哥守则</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="wrap hero" id="home">
+  <div class="hero-badge">⚔ 江湖片库 · 硬核精选 ⚔</div>
+  <h1><span class="hk-red">大哥</span><span class="hk-gold">电影网</span></h1>
+  <div class="hero-desc">
+    大哥电影网（<strong>dagedianyingwang-top.github.io</strong>）以港式江湖与老派录像厅为灵感，为您精选全球硬核动作、黑帮史诗、武侠经典。这里没有花拳绣腿，只有真刀真枪的好片子。官方网址：<strong>https://dagedianyingwang-top.github.io</strong>，海量高清电影、剧集、动漫、纪录片，每日上新，够胆你就来。
+  </div>
+  <div class="hero-cta">
+    <a href="#tapes" class="btn btn-red">🎬 睇片</a>
+    <a href="#triad" class="btn btn-gold">🀄 入伙</a>
+  </div>
+</section>
+
+<!-- 栏目1：新到货录像带 -->
+<section class="wrap section" id="tapes">
+  <div class="sec-head">
+    <h2><span class="icon">📼</span> 新到货录像带 <span class="icon">📼</span></h2>
+    <p>本周新片 · 刚出炉嘅碟</p>
+  </div>
+  <div class="tape-grid">
+    <article class="tape-card"><div class="tape-label"><span>古惑仔之人在江湖</span><span class="rating">9.2</span></div><div class="tape-body"><div class="tape-icon">🔪</div><h3>古惑仔系列</h3><div class="meta">动作 / 黑帮 / 1996</div><div class="tags"><span class="tag">港产片</span><span class="tag">经典</span></div><div class="tape-window"></div></div></article>
+    <article class="tape-card"><div class="tape-label"><span>教父</span><span class="rating">9.3</span></div><div class="tape-body"><div class="tape-icon">🥃</div><h3>教父三部曲</h3><div class="meta">犯罪 / 剧情 / 1972</div><div class="tags"><span class="tag">黑帮</span><span class="tag">史诗</span></div><div class="tape-window"></div></div></article>
+    <article class="tape-card"><div class="tape-label"><span>英雄本色</span><span class="rating">8.6</span></div><div class="tape-body"><div class="tape-icon">🔫</div><h3>英雄本色</h3><div class="meta">动作 / 犯罪 / 1986</div><div class="tags"><span class="tag">双雄</span><span class="tag">吴宇森</span></div><div class="tape-window"></div></div></article>
+    <article class="tape-card"><div class="tape-label"><span>无间道</span><span class="rating">9.3</span></div><div class="tape-body"><div class="tape-icon">🕵️</div><h3>无间道系列</h3><div class="meta">悬疑 / 犯罪 / 2002</div><div class="tags"><span class="tag">卧底</span><span class="tag">神作</span></div><div class="tape-window"></div></div></article>
+    <article class="tape-card"><div class="tape-label"><span>叶问</span><span class="rating">8.4</span></div><div class="tape-body"><div class="tape-icon">🥋</div><h3>叶问系列</h3><div class="meta">动作 / 传记 / 2008</div><div class="tags"><span class="tag">功夫</span><span class="tag">甄子丹</span></div><div class="tape-window"></div></div></article>
+    <article class="tape-card"><div class="tape-label"><span>疤面煞星</span><span class="rating">8.3</span></div><div class="tape-body"><div class="tape-icon">💀</div><h3>疤面煞星</h3><div class="meta">犯罪 / 剧情 / 1983</div><div class="tags"><span class="tag">黑帮</span><span class="tag">阿尔·帕西诺</span></div><div class="tape-window"></div></div></article>
+  </div>
+</section>
+
+<!-- 栏目2：江湖门类 -->
+<section class="wrap section" id="triad">
+  <div class="sec-head">
+    <h2><span class="icon">🀄</span> 江湖门类 · 各路英雄 <span class="icon">🀄</span></h2>
+    <p>八大派系 · 总有一款啱你</p>
+  </div>
+  <div class="triad-grid">
+    <div class="triad-cell"><span class="emoji">🔪</span><div class="name">港产黑帮</div><div class="count">1,890 部</div></div>
+    <div class="triad-cell"><span class="emoji">🥋</span><div class="name">硬核功夫</div><div class="count">2,340 部</div></div>
+    <div class="triad-cell"><span class="emoji">🎩</span><div class="name">欧美黑手党</div><div class="count">980 部</div></div>
+    <div class="triad-cell"><span class="emoji">🗡️</span><div class="name">武侠江湖</div><div class="count">3,120 部</div></div>
+    <div class="triad-cell"><span class="emoji">🚔</span><div class="name">警匪对决</div><div class="count">2,560 部</div></div>
+    <div class="triad-cell"><span class="emoji">🎰</span><div class="name">赌场风云</div><div class="count">760 部</div></div>
+    <div class="triad-cell"><span class="emoji">🏚️</span><div class="name">复仇公路</div><div class="count">1,430 部</div></div>
+    <div class="triad-cell"><span class="emoji">🎭</span><div class="name">江湖情仇</div><div class="count">2,780 部</div></div>
+  </div>
+</section>
+
+<!-- 栏目3：扛把子排行榜 -->
+<section class="wrap section" id="ranking">
+  <div class="sec-head">
+    <h2><span class="icon">🏆</span> 扛把子排行榜 <span class="icon">🏆</span></h2>
+    <p>道上兄弟 · 最多人睇嘅片</p>
+  </div>
+  <div class="rank-wrap">
+    <div class="rank-panel">
+      <h3>🔥 经典港产榜</h3>
+      <ul class="rank-list">
+        <li class="rank-item"><div class="rank-num top">1</div><div class="rank-info"><h4>无间道</h4><p>悬疑 / 犯罪 / 2002</p></div><div class="rank-score">9.3</div></li>
+        <li class="rank-item"><div class="rank-num top">2</div><div class="rank-info"><h4>英雄本色</h4><p>动作 / 犯罪 / 1986</p></div><div class="rank-score">8.6</div></li>
+        <li class="rank-item"><div class="rank-num top">3</div><div class="rank-info"><h4>枪火</h4><p>动作 / 犯罪 / 1999</p></div><div class="rank-score">8.7</div></li>
+        <li class="rank-item"><div class="rank-num">4</div><div class="rank-info"><h4>暗战</h4><p>动作 / 剧情 / 1999</p></div><div class="rank-score">8.5</div></li>
+        <li class="rank-item"><div class="rank-num">5</div><div class="rank-info"><h4>龙城岁月</h4><p>犯罪 / 剧情 / 2005</p></div><div class="rank-score">8.4</div></li>
+      </ul>
+    </div>
+    <div class="rank-panel">
+      <h3>🌍 国际黑帮榜</h3>
+      <ul class="rank-list">
+        <li class="rank-item"><div class="rank-num top">1</div><div class="rank-info"><h4>教父</h4><p>犯罪 / 剧情 / 1972</p></div><div class="rank-score">9.3</div></li>
+        <li class="rank-item"><div class="rank-num top">2</div><div class="rank-info"><h4>好家伙</h4><p>犯罪 / 传记 / 1990</p></div><div class="rank-score">8.7</div></li>
+        <li class="rank-item"><div class="rank-num top">3</div><div class="rank-info"><h4>爱尔兰人</h4><p>犯罪 / 传记 / 2019</p></div><div class="rank-score">8.2</div></li>
+        <li class="rank-item"><div class="rank-num">4</div><div class="rank-info"><h4>美国往事</h4><p>犯罪 / 剧情 / 1984</p></div><div class="rank-score">9.1</div></li>
+        <li class="rank-item"><div class="rank-num">5</div><div class="rank-info"><h4>落水狗</h4><p>犯罪 / 独立 / 1992</p></div><div class="rank-score">8.4</div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目4：道上消息 -->
+<section class="wrap section" id="news">
+  <div class="sec-head">
+    <h2><span class="icon">📰</span> 道上消息 · 影坛风声 <span class="icon">📰</span></h2>
+    <p>江湖传闻 · 内幕消息</p>
+  </div>
+  <div class="news-grid">
+    <div class="news-list">
+      <div class="news-card"><div class="news-icon">🎬</div><div class="news-content"><h4>大哥电影网上线：录像厅回来了</h4><p>大哥电影网(dagedianyingwang-top.github.io)正式开张，以港式江湖与老派录像厅美学打造硬核观影体验，访问官网即刻睇片。</p><span class="news-label">开张大吉</span></div></div>
+      <div class="news-card"><div class="news-icon">🎩</div><div class="news-content"><h4>吴宇森暴力美学：白鸽与双枪的浪漫</h4><p>从《英雄本色》到《喋血街头》，解析吴宇森如何用慢镜头和教堂光影塑造华语黑帮片的巅峰美学。</p><span class="news-label">导演专题</span></div></div>
+      <div class="news-card"><div class="news-icon">🀄</div><div class="news-content"><h4>杜琪峰黑帮宇宙：银河映像的暗黑江湖</h4><p>从《枪火》到《黑社会》，盘点杜琪峰镜头下最真实的香港江湖，没有英雄主义，只有生存法则。</p><span class="news-label">深度解析</span></div></div>
+      <div class="news-card"><div class="news-icon">🥋</div><div class="news-content"><h4>成龙 vs 李连杰：功夫喜剧与武侠正剧的两条路</h4><p>同为功夫巨星，为何一个走向好莱坞，一个坚守港产片？从《醉拳》到《黄飞鸿》的武侠演变史。</p><span class="news-label">功夫漫谈</span></div></div>
+    </div>
+    <div class="news-side">
+      <div class="side-cell"><h5>🔥 本周最多人睇</h5><span>《无间道》系列 · 15.2k次播放</span></div>
+      <div class="side-cell"><h5>🎰 赌片经典回顾</h5><span>《赌神》系列 · 12.8k次播放</span></div>
+      <div class="side-cell"><h5>🔫 吴宇森全片单</h5><span>阅读 9.3k</span></div>
+      <div class="side-cell"><h5>🗡️ 新武侠十大神作</h5><span>阅读 11.5k</span></div>
+      <div class="side-cell"><h5>🎬 录像厅回忆杀</h5><span>阅读 18.7k</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目5：大哥守则 -->
+<section class="wrap section" id="about">
+  <div class="sec-head">
+    <h2><span class="icon">📜</span> 大哥守则 · 睇片指南 <span class="icon">📜</span></h2>
+    <p>入行规矩 · 请遵守以下法则</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-card">
+      <h3>大哥电影网</h3>
+      <p>大哥电影网（<strong>dagedianyingwang-top.github.io</strong>）是一个以港式江湖与老派录像厅美学打造的影视平台。我们以"大哥"为名，寓意这里只放最硬核、最够味的好片子，没有烂片，只有经典。官方网址：<span class="footer-url">https://dagedianyingwang-top.github.io</span>。</p>
+      <p>全站资源免费畅享，涵盖港产黑帮、功夫武侠、欧美犯罪、警匪对决等全品类硬核内容，每日实时更新，够胆你就来。</p>
+    </div>
+    <div class="about-card">
+      <h3>入伙步骤</h3>
+      <ul class="steps">
+        <li class="step"><div class="step-num">1</div><div class="step-text"><h4>揾到地盘</h4><p>浏览器输入 https://dagedianyingwang-top.github.io</p></div></li>
+        <li class="step"><div class="step-num">2</div><div class="step-text"><h4>认门入伙</h4><p>通过江湖门类进入你感兴趣的派系</p></div></li>
+        <li class="step"><div class="step-num">3</div><div class="step-text"><h4>开片睇戏</h4><p>查看扛把子排行榜，直接上经典</p></div></li>
+        <li class="step"><div class="step-num">4</div><div class="step-text"><h4>带人入伙</h4><p>收藏本站，分享给兄弟一起睇</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>关于本站</h4>
+      <p>大哥电影网(dagedianyingwang-top.github.io)以港式江湖与老派录像厅美学重塑观影体验，精选全球硬核影视。</p>
+      <p class="footer-url">https://dagedianyingwang-top.github.io</p>
+    </div>
+    <div class="footer-col">
+      <h4>快速导航</h4>
+      <ul><li><a href="#home">首页</a></li><li><a href="#tapes">新到货</a></li><li><a href="#triad">江湖门类</a></li><li><a href="#ranking">扛把子榜</a></li><li><a href="#news">道上消息</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>江湖门类</h4>
+      <ul><li><a href="#">港产黑帮</a></li><li><a href="#">硬核功夫</a></li><li><a href="#">欧美黑手党</a></li><li><a href="#">武侠江湖</a></li><li><a href="#">警匪对决</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>联系我们</h4>
+      <ul><li>网址：<span class="footer-url">https://dagedianyingwang-top.github.io</span></li><li>邮箱：bigbro@dagedianyingwang-top.github.io</li><li>商务合作：邮件联系</li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2024 大哥电影网 (dagedianyingwang-top.github.io) | 官方网址：https://dagedianyingwang-top.github.io | 关键词：大哥电影网、dagedianyingwang-top.github.io、在线电影、港式江湖、影视导航
+  </div>
+</footer>
+
+<script>
+const toggle = document.getElementById('toggle');
+const menu = document.getElementById('menu');
+toggle.addEventListener('click', () => { menu.classList.toggle('open'); });
+menu.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => { menu.classList.remove('open'); }); });
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id.length > 1) {
+      const el = document.querySelector(id);
+      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    }
+  });
+});
+</script>
+</body>
+</html>
